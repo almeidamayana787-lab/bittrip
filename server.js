@@ -133,7 +133,7 @@ app.get('/api/user/info', authenticateToken, async (req, res) => {
 });
 
 app.get('/api/referral/qr', authenticateToken, async (req, res) => {
-    const inviteUrl = `http://163.245.218.28:3000/AUTH.HTML?ref=${req.user.referral_code}`;
+    const inviteUrl = `/AUTH.HTML?ref=${req.user.referral_code}`;
     try {
         const qrCodeData = await qrcode.toDataURL(inviteUrl);
         res.json({ success: true, qr: qrCodeData, url: inviteUrl });
