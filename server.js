@@ -9,8 +9,8 @@ const axios = require('axios');
 const fs = require('fs');
 
 const app = express();
-const PORT = 3000;
-const SECRET_KEY = '30win_secret_key_2024';
+const PORT = process.env.PORT || 3000;
+const SECRET_KEY = process.env.SECRET_KEY || '30win_secret_key_2024';
 
 app.use(cors());
 app.use(express.json());
@@ -23,10 +23,11 @@ app.get('/favicon.ico', (req, res) => {
 
 // MySQL Connection Pool
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'win30_user',
-    password: 'Win30@Pass',
-    database: '30win',
+    host: process.env.MYSQLHOST || 'localhost',
+    user: process.env.MYSQLUSER || 'win30_user',
+    password: process.env.MYSQLPASSWORD || 'Win30@Pass',
+    database: process.env.MYSQLDATABASE || '30win',
+    port: process.env.MYSQLPORT || 3306,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
